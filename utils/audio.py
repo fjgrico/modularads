@@ -13,5 +13,5 @@ def generar_audios(modulos):
             voice="Antonio",
             model="eleven_monolingual_v1"
         )
-        with open(f"audios/bloque_{{i+1}}.mp3", "wb") as f:
+        with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
             f.write(audio)
