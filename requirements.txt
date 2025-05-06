@@ -1,0 +1,7 @@
+streamlit
+openai
+elevenlabs
+moviepy
+reportlab
+docx2pdf
+python-docx
