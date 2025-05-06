@@ -3,7 +3,6 @@ from utils.generator import generar_modulos
 from utils.zip_creator import crear_zip_entrega
 
 st.set_page_config(page_title="ModularAds", layout="wide")
-
 st.title("🧠 ModularAds – Generador de Anuncios con IA")
 
 with st.form("form_datos"):
@@ -14,7 +13,7 @@ with st.form("form_datos"):
     submit = st.form_submit_button("🚀 Generar contenido modular")
 
 if submit:
-    from utils.audio import generar_audios  # 🔄 Import moved inside the block
+    from utils.audio import generar_audios
 
     with st.spinner("Generando Hooks, Cuerpos y CTAs..."):
         modulos = generar_modulos(sector, objetivo, mercado, avatar)
