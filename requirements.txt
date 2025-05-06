@@ -3,5 +3,5 @@ openai
 elevenlabs==1.57.0
 moviepy
 reportlab
-docx2pdf
 python-docx
+docx2pdf
