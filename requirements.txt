@@ -1,6 +1,6 @@
 streamlit
 openai
-elevenlabs
+elevenlabs==1.57.0
 moviepy
 reportlab
 docx2pdf
