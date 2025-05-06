@@ -11,13 +11,12 @@ with st.form("form_datos"):
     objetivo = st.text_input("🎯 Objetivo de la campaña")
     mercado = st.text_input("🌍 Tipo de mercado (B2B, local, etc.)")
     avatar = st.text_area("🧑‍🎤 Avatar o público objetivo")
-
     submit = st.form_submit_button("🚀 Generar contenido modular")
 
 if submit:
-	from utils.audio import generar_audios
+    from utils.audio import generar_audios  # 🔄 Import moved inside the block
 
-	with st.spinner("Generando Hooks, Cuerpos y CTAs..."):
+    with st.spinner("Generando Hooks, Cuerpos y CTAs..."):
         modulos = generar_modulos(sector, objetivo, mercado, avatar)
         st.success("✅ Generado con éxito")
 
