@@ -1,6 +1,5 @@
 import streamlit as st
 from utils.generator import generar_modulos
-from utils.audio import generar_audios
 from utils.zip_creator import crear_zip_entrega
 
 st.set_page_config(page_title="ModularAds", layout="wide")
@@ -16,7 +15,9 @@ with st.form("form_datos"):
     submit = st.form_submit_button("🚀 Generar contenido modular")
 
 if submit:
-    with st.spinner("Generando Hooks, Cuerpos y CTAs..."):
+	from utils.audio import generar_audios
+
+	with st.spinner("Generando Hooks, Cuerpos y CTAs..."):
         modulos = generar_modulos(sector, objetivo, mercado, avatar)
         st.success("✅ Generado con éxito")
 
