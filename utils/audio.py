@@ -8,9 +8,13 @@ def generar_audios(modulos):
     textos = modulos["hooks"].split("\n")[:3] + modulos["ctas"].split("\n")[:1]
 
     for i, texto in enumerate(textos):
-        audio = client.generate(
+        audio_stream = client.generate(
             text=texto,
             voice="iwNksRcTU0mglXb8PAk5",
-            model="eleven_monolingual_v1"
+            model="eleven_monolingual_v1",
+            stream=True
         )
-        audio.save(f"audios/bloque_{i+1}.mp3")  # ✅ solución correcta
+
+        with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
+            for chunk in audio_stream:
+                f.write(chunk)
