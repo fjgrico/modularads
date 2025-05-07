@@ -1,16 +1,23 @@
 import openai
+import os
+
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generar_modulos(sector, objetivo, mercado, avatar):
-    prompt_hooks = open("prompts/hooks.txt").read() + f"\nSector: {sector}, Objetivo: {objetivo}, Mercado: {mercado}, Avatar: {avatar}"
-    prompt_cuerpos = open("prompts/cuerpos.txt").read() + f"\nSector: {sector}, Objetivo: {objetivo}, Mercado: {mercado}, Avatar: {avatar}"
-    prompt_ctas = open("prompts/ctas.txt").read() + f"\nSector: {sector}, Objetivo: {objetivo}, Mercado: {mercado}, Avatar: {avatar}"
-
     def pedir(prompt):
-        respuesta = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
-            messages=[{"role": "user", "content": prompt}]
+            messages=[
+                {"role": "system", "content": "Eres un experto en copywriting, persuasión y guiones de anuncios estilo Hormozi"},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7
         )
-        return respuesta["choices"][0]["message"]["content"]
+        return response.choices[0].message.content
+
+    prompt_hooks = open("prompts/hooks.txt").read() + f"\n\nSector: {sector}\nObjetivo: {objetivo}\nMercado: {mercado}\nAvatar: {avatar}"
+    prompt_cuerpos = open("prompts/cuerpos.txt").read() + f"\n\nSector: {sector}\nObjetivo: {objetivo}\nMercado: {mercado}\nAvatar: {avatar}"
+    prompt_ctas = open("prompts/ctas.txt").read() + f"\n\nSector: {sector}\nObjetivo: {objetivo}\nMercado: {mercado}\nAvatar: {avatar}"
 
     return {
         "hooks": pedir(prompt_hooks),
