@@ -10,7 +10,7 @@ def generar_audios(modulos):
     for i, texto in enumerate(textos):
         audio = client.generate(
             text=texto,
-            voice="Baldo",
+            voice="Antoni",
             model="eleven_monolingual_v1"
         )
         with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
