@@ -10,8 +10,13 @@ def generar_audios(modulos):
     for i, texto in enumerate(textos):
         audio = client.generate(
             text=texto,
-            voice="iwNksRcTU0mglXb8PAk5",  # ✅ tu voz personalizada  # o el ID de voz que prefieras
+            voice="iwNksRcTU0mglXb8PAk5",
             model="eleven_monolingual_v1"
         )
-        with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
-            f.write(audio.content)
+
+        # Confirmamos que audio es directamente binario y lo escribimos tal cual
+        if isinstance(audio, bytes):
+            with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
+                f.write(audio)
+        else:
+            raise TypeError(f"Tipo inesperado recibido de ElevenLabs: {type(audio)}")
