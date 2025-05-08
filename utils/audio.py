@@ -7,13 +7,13 @@ def generar_audios(modulos):
     textos = modulos["hooks"].split("\n")[:3] + modulos["ctas"].split("\n")[:1]
 
     for i, texto in enumerate(textos):
-        audio = client.generate(
+        audio_generator = client.generate(
             text=texto,
-            voice="cgSgspJ2msm6clMCkdW9",  # Jessica
+            voice="cgSgspJ2msm6clMCkdW9",
             model="eleven_monolingual_v1",
-            stream=False  # ✅ estándar compatible
+            stream=False  # funciona con cuentas sin streaming habilitado
         )
 
-        # Guardar el contenido como binario
         with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
-            f.write(audio)  # funciona con ElevenLabs >= 1.57.0
+            for chunk in audio_generator:
+                f.write(chunk)
