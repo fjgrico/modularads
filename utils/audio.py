@@ -10,7 +10,7 @@ def generar_audios(modulos):
     for i, texto in enumerate(textos):
         audio_stream = client.generate(
             text=texto,
-            voice="iwNksRcTU0mglXb8PAk5",
+            voice="cgSgspJ2msm6clMCkdW9",  # Voz: Jessica
             model="eleven_monolingual_v1",
             stream=True
         )
