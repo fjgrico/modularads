@@ -6,7 +6,7 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def generar_modulos(sector, objetivo, mercado, avatar):
     def pedir(prompt):
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "Eres un experto en copywriting, persuasión y guiones de anuncios estilo Hormozi"},
                 {"role": "user", "content": prompt}
