@@ -9,12 +9,15 @@ def generar_audios(modulos):
     for i, texto in enumerate(textos):
         audio_generator = client.generate(
             text=texto,
-            voice="cgSgspJ2msm6clMCkdW9",
+            voice="cgSgspJ2msm6clMCkdW9",  # Voz personalizada
             model="eleven_monolingual_v1",
-            stream=False  # funciona con cuentas sin streaming habilitado
+            stream=False  # No usamos el streaming ahora
         )
 
         with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
+            # Si el audio es un generador, recogemos y escribimos los bytes
             for chunk in audio_generator:
-    f.write(chunk)  # Asegura que cada chunk sea binario y se guarda correctamente
-
+                if isinstance(chunk, bytes):
+                    f.write(chunk)
+                else:
+                    raise TypeError(f"El trozo de audio no es de tipo bytes, sino {type(chunk)}")
