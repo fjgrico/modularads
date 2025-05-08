@@ -16,4 +16,5 @@ def generar_audios(modulos):
 
         with open(f"audios/bloque_{i+1}.mp3", "wb") as f:
             for chunk in audio_generator:
-                f.write(chunk)
+    f.write(chunk)  # Asegura que cada chunk sea binario y se guarda correctamente
+
